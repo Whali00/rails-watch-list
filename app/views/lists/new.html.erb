@@ -1,8 +1,15 @@
-<h1>New List</h1>
+<nav class="navbar navbar-dark bg-dark d-flex">
+  <%= link_to root_path, class: "text-decoration-none" do %>
+    <p class="text-warning m-2 ms-3"><i class="fa-solid fa-ticket"></i> Watch Lists</p>
+  <% end %>
+    <%= link_to "Your Watchlists", root_path, class: "text-decoration-none text-warning me-3" %>
+</nav>
 
-<%= simple_form_for(@list) do |f| %>
-  <%= f.input :name %>
-  <%= f.submit class: "btn btn-primary" %>
-<% end %>
-
-<%= link_to "Back to the lists", lists_path(@lists), class: 'btn btn-light' %>
+<div class ="new_list">
+  <h1>New List</h1>
+  <%= simple_form_for(@list) do |f| %>
+    <%= f.input :name %>
+    <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+  <%= link_to "Back to the lists", root_path(@lists), class: 'btn btn-light' %>
+</div>

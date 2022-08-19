@@ -1,15 +1,34 @@
-<h1><%= @list.name %></h1>
-
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li><h4><%= bookmark.movie.title %></h4>
-        <p><%= bookmark.comment %></p>
-        <%= link_to "Delete", list_path(@list), class: "text-decoration-none text-danger", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-    </li>
-
+<nav class="navbar navbar-dark bg-dark d-flex">
+  <%= link_to root_path, class: "text-decoration-none" do %>
+    <p class="text-warning m-2 ms-3"><i class="fa-solid fa-ticket"></i> Watch Lists</p>
   <% end %>
-</ul>
+  <%= link_to "Your list", list_path(@list), class: "text-decoration-none text-warning me-3" %>
+</nav>
 
-<%= link_to "Add a new bookmark", new_list_bookmark_path(@list), class: 'btn btn-primary' %>
+<div class="bookmark">
+  <h1><%= @list.name %></h1>
 
-<%= link_to "Back to the list", lists_path, class: 'btn btn-light' %>
+  <div class="card mb-3" style="max-width: 540px;">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="row g-0">
+        <div class="col-md-4 bg-dark text-light">
+          Movie
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= bookmark.movie.title %></h5>
+            <p class="card-text">Synopsis : <%= bookmark.movie.overview %></p>
+            <p class="card-text">Release at : <%= bookmark.movie.release_date %></p>
+            <p class="card-text">Rating : <%= bookmark.movie.rating %>/10</p>
+            <p class="card-text"><em><%= bookmark.comment %></em></p>
+            <%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-decoration-none text-danger" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "Add a new bookmark", new_list_bookmark_path(@list), class: 'btn btn-primary' %>
+
+  <%= link_to "Back to the lists", root_path, class: 'btn btn-light' %>
+</div>
